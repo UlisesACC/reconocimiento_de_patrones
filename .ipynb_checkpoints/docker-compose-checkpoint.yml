@@ -1,0 +1,11 @@
+services:
+  jupyter:
+    image: jupyter/scipy-notebook  # Usa la imagen oficial de Jupyter con Python
+    ports:
+      - "8888:8888"  # Exponer el puerto para acceder a Jupyter
+    volumes:
+      - .:/home/jovyan/work  # Montar la carpeta actual en el contenedor
+    command: >
+      sh -c "pip install --no-cache-dir -r /home/jovyan/work/requirements.txt &&
+             start-notebook.sh --NotebookApp.token='' --NotebookApp.password='' &&
+             echo ' Jupyter Notebook está corriendo en: http://127.0.0.1:8888/lab'"
